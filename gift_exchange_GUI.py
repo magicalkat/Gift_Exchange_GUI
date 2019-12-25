@@ -10,12 +10,20 @@ import gift_exchange as ge
 
 #Main calculation
 def draw():
-    num_of_people = people_num_entry.get()
-    draw_times = regenerating_time_entry.get()
-    for i in range(int(draw_times)):
-        giver,receiver=ge.gift_exchange(num_of_people)
-    for i in range(len(giver)):
-        char=str(giver[i])+"\tto\t"+str(receiver[i])+"\n"
+    text.delete(1.0,tk.END)
+    try:
+        num_of_people = people_num_entry.get()
+        draw_times = regenerating_time_entry.get()
+        
+
+        for i in range(int(draw_times)):
+            giver,receiver=ge.gift_exchange(num_of_people)
+        for i in range(len(giver)):
+            char=str(giver[i])+"\tto\t"+str(receiver[i])+"\n"
+            text.insert('insert',char)
+
+    except:
+        char="請確認人數或重抽次數是否為正整數"
         text.insert('insert',char)
 
 
@@ -29,7 +37,8 @@ window.geometry('800x600')
 window.configure(background='white')
 
 #For header in the window
-header_label = tk.Label(window, text='交換禮物生成器')
+header_label = tk.Label(window, text='交換禮物生成器'
+                        , font=('microsoft yahei', 24, 'bold') )
 header_label.pack()
 
 #For Parameters:People number group 
